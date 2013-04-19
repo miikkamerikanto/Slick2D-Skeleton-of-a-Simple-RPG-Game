@@ -3,7 +3,6 @@ package iceadventure;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Hero {
@@ -13,7 +12,7 @@ public class Hero {
     private Vector2f pos;
     private Rectangle rectangle;
     private static final int ANIMATIONSPEED = 500;
-    private static final float SPEED = 0.1f;
+    private static final float SPEED = 0.4f;
     private int w, h;
 
     public Hero(float x, float y) throws SlickException {
@@ -34,7 +33,11 @@ public class Hero {
          */
         w = down[0].getWidth();
         h = down[0].getHeight();
-       
+        System.out.println("Initializing...");
+        System.out.println("Hero width: " + down[0].getWidth());
+        System.out.println("Hero height: " + down[0].getHeight());
+        System.out.println("Hero's speed: " + SPEED);
+        
         pos = new Vector2f(x, y);
         rectangle = new Rectangle(x, y, w, h);
         /**
@@ -56,24 +59,24 @@ public class Hero {
         Input input = gc.getInput();
 
         /**
-         * If the hero is moving we have to deal with changing hero's pos and
+         * If the hero is moving we have to deal with changing hero's position and
          * his movement animations.
          */
         if (input.isKeyDown(Input.KEY_UP)) {
-            if (!gps.isBlocked(pos.x + w -1, pos.y - delta * SPEED) && !gps.isBlocked(pos.x + 1, pos.y - delta * SPEED)) {
+            if (!gps.isBlocked(pos.x + w -4, pos.y - delta * SPEED) && !gps.isBlocked(pos.x + 4, pos.y - delta * SPEED)) {
             pos.y -= delta * SPEED;
             }
             hero = movementUp;
             hero.update(delta);
             lastDirection = 'u';
         } else if (input.isKeyDown(Input.KEY_DOWN)) {
-            if (!gps.isBlocked(pos.x + w - 1, pos.y + h + delta * SPEED) && !gps.isBlocked(pos.x + 1, pos.y + h + delta * SPEED)) {
+            if (!gps.isBlocked(pos.x + w - 4, pos.y + h + delta * SPEED) && !gps.isBlocked(pos.x + 4, pos.y + h + delta * SPEED)) {
             pos.y += delta * SPEED;
             }hero = movementDown;
             hero.update(delta);
             lastDirection = 'd';
         } else if (input.isKeyDown(Input.KEY_LEFT)) {
-            if (!gps.isBlocked(pos.x - delta * SPEED, pos.y + 1) && !gps.isBlocked(pos.x - delta * SPEED, pos.y + h - 1)) {
+            if (!gps.isBlocked(pos.x - delta * SPEED, pos.y + 4) && !gps.isBlocked(pos.x - delta * SPEED, pos.y + h - 4)) {
                 pos.x -= delta * SPEED;
             }
             hero = movementLeft;
@@ -81,7 +84,7 @@ public class Hero {
             lastDirection = 'l';
 
         } else if (input.isKeyDown(Input.KEY_RIGHT)) {
-            if (!gps.isBlocked(pos.x + w + delta * SPEED, pos.y + h - 1) && !gps.isBlocked(pos.x + w + delta * SPEED, pos.y + 1)) {
+            if (!gps.isBlocked(pos.x + w + delta * SPEED, pos.y + h - 4) && !gps.isBlocked(pos.x + w + delta * SPEED, pos.y + 4)) {
                 pos.x += delta * SPEED;
             }
             hero = movementRight;

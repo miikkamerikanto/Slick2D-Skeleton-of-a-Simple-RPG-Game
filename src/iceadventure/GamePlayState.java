@@ -1,11 +1,7 @@
 package iceadventure;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -41,10 +37,13 @@ public class GamePlayState extends BasicGameState {
         mapHeight = map.getHeight() * map.getTileHeight();
         tileHeight = map.getTileHeight();
         tileWidth = map.getTileWidth();
-        player = new Hero(tileWidth * 4, tileHeight * 4);
+        player = new Hero(tileWidth, tileHeight);
         camera = new Camera(map, mapWidth, mapHeight);
         blocked = new boolean[map.getWidth()][map.getHeight()];
         initializeBlocked();
+        System.out.println("Initializing...");
+        System.out.println("Tile width: " + map.getTileWidth());
+        System.out.println("Tile height: " + map.getTileHeight());
     }
     
     @Override
@@ -61,7 +60,7 @@ public class GamePlayState extends BasicGameState {
     
     public boolean isBlocked(float x, float y) {
         int xBlock = (int) x / map.getTileWidth();
-        int yBlock = (int) y / map.getTileWidth();
+        int yBlock = (int) y / map.getTileHeight();
         return blocked[xBlock][yBlock];
     }
     
