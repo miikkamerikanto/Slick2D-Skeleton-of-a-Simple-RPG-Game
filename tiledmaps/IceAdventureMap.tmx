@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="50" tilewidth="29" tileheight="34">
  <tileset firstgid="1" name="snow" tilewidth="29" tileheight="34">
-  <image source="../../Slick2DCollisionTutorial/tiledmap/snow.png" width="128" height="128"/>
+  <image source="snow.png" width="128" height="128"/>
  </tileset>
  <tileset firstgid="13" name="ice" tilewidth="29" tileheight="34">
-  <image source="../../Slick2DCollisionTutorial/tiledmap/ice.png" width="128" height="128"/>
+  <image source="ice.png" width="128" height="128"/>
  </tileset>
  <layer name="Snow" width="100" height="50">
   <data encoding="base64" compression="zlib">
