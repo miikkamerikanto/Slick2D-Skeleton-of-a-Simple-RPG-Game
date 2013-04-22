@@ -7,8 +7,9 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class IceAdventure extends StateBasedGame {
 
-    public static final int MENUSTATE = 0;
+    public static final int STARTMENUSTATE = 0;
     public static final int GAMEPLAYSTATE = 1;
+    public static final int MENUSTATE = 2;
 
     public static final int WIDTH = 1366;
     public static final int HEIGHT = 768;
@@ -16,15 +17,17 @@ public class IceAdventure extends StateBasedGame {
     
     public IceAdventure() {
         super("Ice Adventure");
-        addState(new MenuState(MENUSTATE));
+        addState(new StartMenuState(STARTMENUSTATE));
         addState(new GamePlayState(GAMEPLAYSTATE));
-        this.enterState(MENUSTATE);
+        addState(new MenuState(MENUSTATE));
+        this.enterState(STARTMENUSTATE);
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
-        getState(MENUSTATE).init(gc, this);
+        getState(STARTMENUSTATE).init(gc, this);
         getState(GAMEPLAYSTATE).init(gc, this);
+        getState(MENUSTATE).init(gc, this);
     }
 
     public static void main(String[] args) throws SlickException {

@@ -6,13 +6,12 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class MenuState extends BasicGameState {
+public class StartMenuState extends BasicGameState {
 
-    private static final int NUMBEROFCHOICES = 4;
-    private static final int CONTINUE = 0;
-    private static final int SAVE = 1;
-    private static final int LOAD = 2;
-    private static final int QUIT = 3;
+    private static final int NUMBEROFCHOICES = 3;
+    private static final int START = 0;
+    private static final int LOAD = 1;
+    private static final int QUIT = 2;
     private String[] playersOptions = new String[NUMBEROFCHOICES];
     private Font menuFont, creditsFont;
     private TrueTypeFont playersOptionsTTF, creditsTTF;
@@ -22,7 +21,7 @@ public class MenuState extends BasicGameState {
     private Vector2f heropos = new Vector2f(0, 0);
     private static final String[] credits = {"Credits", "Code and TiledMap: Miikka Merikanto, miikka.merikanto@businesscollege.fi", "Hero's images (CC3.0): cjc83486 from opengameart.com, http://opengameart.org/users/cjc83486", "CC3.0 reserved"};
 
-    public MenuState(int id) {
+    public StartMenuState(int id) {
         stateid = id;
     }
 
@@ -30,18 +29,16 @@ public class MenuState extends BasicGameState {
     public int getID() {
         return stateid;
     }
-
+    
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         menuFont = new Font("Verdana", Font.BOLD, 40);
         creditsFont = new Font("Verdana", Font.PLAIN, 16);
         playersOptionsTTF = new TrueTypeFont(menuFont, true);
         creditsTTF = new TrueTypeFont(creditsFont, true);
-        playersOptions[0] = "Continue";
-        playersOptions[1] = "Save";
-        playersOptions[2] = "Load";
-        playersOptions[3] = "Credits";
-        playersOptions[3] = "Quit";
+        playersOptions[0] = "Start";
+        playersOptions[1] = "Load";
+        playersOptions[2] = "Quit";
     }
 
     @Override
@@ -63,17 +60,12 @@ public class MenuState extends BasicGameState {
         }
         if (input.isKeyPressed(Input.KEY_ENTER)) {
             switch (playersChoice) {
-                case CONTINUE:
-                    sbg.enterState(IceAdventure.GAMEPLAYSTATE);
-                    break;
-                case SAVE:
-                    heropos = ((GamePlayState) sbg.getState(IceAdventure.GAMEPLAYSTATE)).getHeroPosition();
-                    fileio.save(heropos);
+                case START:
                     sbg.enterState(IceAdventure.GAMEPLAYSTATE);
                     break;
                 case LOAD:
                     heropos = fileio.loadSave();
-                    ((GamePlayState) sbg.getState(IceAdventure.GAMEPLAYSTATE)).setHeroPosition(heropos);
+                    ((GamePlayState)sbg.getState(IceAdventure.GAMEPLAYSTATE)).setHeroPosition(heropos);
                     sbg.enterState(IceAdventure.GAMEPLAYSTATE);
                     break;
                 case QUIT:
@@ -98,7 +90,7 @@ public class MenuState extends BasicGameState {
             }
         }
     }
-
+    
     private void renderCredits() {
         for (int i = 0; i < credits.length; i++) {
             creditsTTF.drawString(100, i * 20 + 640, credits[i]);

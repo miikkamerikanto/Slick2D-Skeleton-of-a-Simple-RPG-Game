@@ -33,10 +33,6 @@ public class Hero {
          */
         w = down[0].getWidth();
         h = down[0].getHeight();
-        System.out.println("Initializing...");
-        System.out.println("Hero width: " + down[0].getWidth());
-        System.out.println("Hero height: " + down[0].getHeight());
-        System.out.println("Hero's speed: " + SPEED);
         
         pos = new Vector2f(x, y);
         rectangle = new Rectangle(x, y, w, h);
