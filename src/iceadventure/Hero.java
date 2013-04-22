@@ -12,7 +12,7 @@ public class Hero {
     private Vector2f pos;
     private Rectangle rectangle;
     private static final int ANIMATIONSPEED = 500;
-    private static final float SPEED = 0.4f;
+    private static final float SPEED = 0.1f;
     private int w, h;
 
     public Hero(float x, float y) throws SlickException {
